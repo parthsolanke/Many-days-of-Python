@@ -5,33 +5,33 @@ numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
 print("Welcome to the Password Generator!")
-nr_letters= int(input("How many letters would you like in your password?\n")) 
-nr_symbols = int(input(f"How many symbols would you like?\n"))
-nr_numbers = int(input(f"How many numbers would you like?\n"))
+nr_letters = int(input("How many letters would you like in your password?\n"))
+nr_symbols = int(input("How many symbols would you like?\n"))
+nr_numbers = int(input("How many numbers would you like?\n"))
 
-#Order not randomised:
+# Order not randomised:
 password = []
 password_e = ""
 password_h = ""
 
 for i in range(nr_letters):
-  password += random.choice(letters)
-  
+    password += random.choice(letters)
+
 for i in range(nr_symbols):
- password += random.choice(symbols)
-  
+    password += random.choice(symbols)
+
 for i in range(nr_numbers):
-  password += random.choice(numbers)
+    password += random.choice(numbers)
 
 for i in range(len(password)):
-  password_e += password[i]
- 
+    password_e += password[i]
+
 print(f"Here is your easy password: {password_e}")
 
-#Order of characters randomised:
+# Order of characters randomised:
 random.shuffle(password)
 
 for i in range(len(password)):
-  password_h += password[i]
-  
+    password_h += password[i]
+
 print(f"Here is your hard password: {password_h}")
