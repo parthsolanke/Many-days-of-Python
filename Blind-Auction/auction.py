@@ -1,6 +1,8 @@
 import os
 from art import logo
+
 print(logo)
+
 
 def max_bid(dict):
     max = 0
@@ -9,7 +11,8 @@ def max_bid(dict):
             max = dict[key]
             winner = key
     print(f'Highest bid is {winner}, with ${dict[winner]} of bid amount')
-      
+
+
 bids = {}
 ch = 'yes'
 while ch == 'yes':
