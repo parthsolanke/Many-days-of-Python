@@ -4,6 +4,7 @@ import random
 
 t.colormode(255)
 tim = t.Turtle()
+screen = t.Screen()
 tim.speed('fastest')
 tim.hideturtle()
 tim.penup()
@@ -11,10 +12,6 @@ tim.setheading(225)
 tim.forward(300)
 tim.setheading(0)
 number_of_dots = 100
-
-def clickToExit():
-    screen = t.Screen()
-    screen.exitonclick()
     
 def uTurn():
     if tim.heading() == 0:
@@ -42,4 +39,4 @@ for color in colors:
     
 draw_hirst_dots()
     
-clickToExit()
+screen.exitonclick()

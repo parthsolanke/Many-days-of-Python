@@ -3,13 +3,10 @@ import random
 
 t.colormode(255)
 tim = t.Turtle()
+screen = t.Screen()
 tim.speed('fastest')
 tim.shape('circle')
 directions = [0, 90, 180, 270]
-
-def clickToExit():
-    screen = t.Screen()
-    screen.exitonclick()
 
 def random_color():
     r, g, b = random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)
@@ -43,4 +40,4 @@ def draw_shape(num_sides):
 
 draw_spirograph(100, 10)
 
-clickToExit()
+screen.exitonclick()
