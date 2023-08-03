@@ -2,10 +2,9 @@ import turtle as t
 import random
 
 t.colormode(255)
-tim = t.Turtle()
+tim = t.Turtle(shape='circle')
 screen = t.Screen()
 tim.speed('fastest')
-tim.shape('circle')
 directions = [0, 90, 180, 270]
 
 def random_color():
