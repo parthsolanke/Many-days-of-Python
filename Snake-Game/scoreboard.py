@@ -6,6 +6,8 @@ class ScoreBoard(Turtle):
     
     def __init__(self):
         super().__init__()
+        with open("Snake-Game\data.txt", mode="r") as data:
+            self.highscore = int(data.read())
         self.score = 0
         self.hideturtle()
         self.penup()
@@ -15,15 +17,17 @@ class ScoreBoard(Turtle):
         
     def refresh(self):
         self.clear()
-        self.write(f"SCORE: {self.score}", align=ALIGNMENT, font=FONT)
+        self.write(f"SCORE: {self.score} HIGH SCORE: {self.highscore}", align=ALIGNMENT, font=FONT)
         
     def increase_score(self):
         self.score += 1
         self.refresh()
         
-    def game_over(self):
-        """ msg gets printed before hitting the clear method from refresh
-            hence still being able to see the score """
-        self.goto(0, 0)
-        self.write("GAME OVER!", align=ALIGNMENT, font=FONT)
+    def reset(self):
+        if self.score > self.highscore:
+            self.highscore = self.score
+            with open("Snake-Game\data.txt", mode="w") as data:
+                data.write(f"{self.highscore}")
+        self.score = 0
+        self.refresh()
         

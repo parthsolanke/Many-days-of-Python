@@ -8,19 +8,6 @@ snake = Snake()
 food = Food()
 scoreboard = ScoreBoard()
 
-# boundry
-border = t.Turtle()
-border.hideturtle()
-border.speed("fastest")
-border.color("white")
-border.pensize(3)
-border.penup()
-border.goto(-290, -290)
-border.pendown()
-for side in range(4):
-    border.forward(580)
-    border.left(90)
-
 def listen_to_controls():
     screen.listen()
     screen.onkey(snake.up, "Up")
@@ -50,13 +37,13 @@ while is_game_on:
     # collision with wall
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or \
        snake.head.ycor() > 280 or snake.head.ycor() < -280:
-           is_game_on = False
-           scoreboard.game_over()
-           
+           scoreboard.reset()
+           snake.reset()
+ 
     # collision with tail
     for seg in snake.segments[1:]:
         if snake.head.distance(seg) < 10:
-            is_game_on = False
-            scoreboard.game_over()
+            scoreboard.reset()
+            snake.reset()
 
 screen.exitonclick()
