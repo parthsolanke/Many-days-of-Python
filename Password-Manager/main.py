@@ -1,0 +1,87 @@
+import random
+import tkinter as tk
+from tkinter import messagebox
+
+letters = ['a', 'b', 'c', 'd',
+           'e', 'f', 'g', 'h',
+           'i', 'j', 'k', 'l',
+           'm', 'n', 'o', 'p',
+           'q', 'r', 's', 't',
+           'u', 'v', 'w', 'x',
+           'y', 'z', 'A', 'B',
+           'C', 'D', 'E', 'F',
+           'G', 'H', 'I', 'J',
+           'K', 'L', 'M', 'N',
+           'O', 'P', 'Q', 'R',
+           'S', 'T', 'U', 'V', 
+           'W', 'X', 'Y', 'Z']
+numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+
+def generate_password():
+    
+    password_letters = [random.choice(letters) for _ in range(random.randint(8, 10))]
+    password_symbols = [random.choice(symbols) for _ in range(random.randint(2, 4))]
+    password_numbers = [random.choice(numbers) for _ in range(random.randint(2, 4))]
+
+    password_list = password_letters + password_symbols + password_numbers
+    random.shuffle(password_list)
+
+    password = "".join(password_list)
+    password_entry.insert(0, password)
+
+def save():
+    
+    website = website_entry.get()
+    email = email_entry.get()
+    password = password_entry.get()
+    
+    if len(website) == 0 or len(password) == 0:
+        messagebox.showinfo(title="Warning!", message="Make sure to fill each field.")
+    else:
+        is_ok = messagebox.askokcancel(title=website, message=
+                                    f"Entered details are: \nEmail: {email}"
+                                    f"\nPassword: {password} \nClick Ok to save?")
+        
+        if is_ok:
+            with open(r"Password-Manager\data\data.txt", "a") as file:
+                file.write(f"{website} | {email} | {password}\n")
+                website_entry.delete(0, tk.END)
+                password_entry.delete(0, tk.END)
+
+window = tk.Tk()
+window.title("Password Manager")
+window.config(padx=50, pady=50)
+
+# labels
+website_label = tk.Label(text="Website:")
+website_label.grid(row=1, column=0, padx=2, pady=2)
+
+email_label = tk.Label(text="Email/Username:")
+email_label.grid(row=2, column=0, padx=2, pady=2)
+
+password_label = tk.Label(text="Password:")
+password_label.grid(row=3, column=0, padx=2, pady=2)
+
+# entries
+website_entry = tk.Entry(width=35)
+website_entry.grid(row=1, column=1, columnspan=2, padx=2, pady=2)
+website_entry.focus()
+
+email_entry = tk.Entry(width=35)
+email_entry.grid(row=2, column=1, columnspan=2, padx=2, pady=2)
+email_entry.insert(0, "parthsolanke@gmail.com")
+
+password_entry = tk.Entry(width=35)
+password_entry.grid(row=3, column=1, columnspan=2, padx=2, pady=2)
+
+# buttons
+generate_button = tk.Button(text="Generate", width=10, command=generate_password)
+generate_button.grid(row=4, column=0, padx=2, pady=2)
+generate_button.config(bd=0, bg="#ADD8E6")
+
+add_button = tk.Button(text="Add", width=10, command=save)
+add_button.grid(row=4, column=1, columnspan=2, padx=2, pady=2)
+add_button.config(bd=0, bg="#ADD8E6")
+
+window.mainloop()
