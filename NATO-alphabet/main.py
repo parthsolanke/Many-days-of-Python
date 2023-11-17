@@ -4,9 +4,17 @@ df = pd.read_csv(r"NATO-alphabet\data\nato_phonetic_alphabet.csv")
 nato_dict = {row.letter:row.code for (index, row) in df.iterrows()}
 
 # creating nato dictionary
+
 inp = input("Enter a word: ").upper()
-lst  = [nato_dict[letter] for letter in inp]
-print(lst)
+
+try:
+    lst  = [nato_dict[letter] for letter in inp]
+    
+except KeyError:
+    print("Sorry, only letters in the alphabet please.")
+    
+else: 
+    print(lst)
 
 # NOTE: Loop through rows of a data frame
 # for (index, row) in df.iterrows():
