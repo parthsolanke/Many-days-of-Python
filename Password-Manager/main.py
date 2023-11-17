@@ -1,3 +1,4 @@
+import json
 import random
 import tkinter as tk
 from tkinter import messagebox
@@ -35,19 +36,28 @@ def save():
     website = website_entry.get()
     email = email_entry.get()
     password = password_entry.get()
+    json_dict = {
+        website: {
+            "email": email,
+            "password": password
+        }
+    }
     
     if len(website) == 0 or len(password) == 0:
         messagebox.showinfo(title="Warning!", message="Make sure to fill each field.")
     else:
-        is_ok = messagebox.askokcancel(title=website, message=
-                                    f"Entered details are: \nEmail: {email}"
-                                    f"\nPassword: {password} \nClick Ok to save?")
-        
-        if is_ok:
-            with open(r"Password-Manager\data\data.txt", "a") as file:
-                file.write(f"{website} | {email} | {password}\n")
-                website_entry.delete(0, tk.END)
-                password_entry.delete(0, tk.END)
+        with open(r"Password-Manager\data\data.json", "r") as file:
+            # reading old data
+            data = json.load(file)
+            # updating old data with new data
+            data.update(json_dict)
+            
+        with open(r"Password-Manager\data\data.json", "w") as file:
+            # saving updated data in json file
+            json.dump(data, file, indent=4)
+            
+            website_entry.delete(0, tk.END)
+            password_entry.delete(0, tk.END)
 
 window = tk.Tk()
 window.title("Password Manager")
