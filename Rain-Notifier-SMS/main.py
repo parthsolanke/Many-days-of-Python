@@ -3,7 +3,7 @@ from twilio.rest import Client
 
 LAT = 18.520430
 LNG = 73.856743
-API_Key = "f00ece292bc59e0f3277c98512265da7"
+API_Key = "your-api-key"
 API_URL = "https://api.openweathermap.org/data/2.5/onecall"
 parameters = {
     "lat": LAT,
@@ -24,8 +24,8 @@ for hour_data in weather_slice:
     if int(condition_code) < 700:
         will_rain = True
 
-account_sid = 'AC433b32a2aabc6b8f4d600eaf833632d7'
-auth_token = '2ceb693e4cd10e8c114fd1addcab7f27'    
+account_sid = 'your-acc-sid'
+auth_token = 'your-acc-auth-token'    
 if will_rain:
     client = Client(account_sid, auth_token)
     message = client.messages.create(
