@@ -31,7 +31,8 @@ yesterday_closing_price = float(price_list[0]["4. close"])
 # getting the day before yesterday's closing price
 day_before_yesterday_closing_price = float(price_list[1]["4. close"])
 
-# getting the difference between yesterday's closing price and day before yesterday's closing price
+# difference between
+# yesterday's closing price and day before yesterday's closing price
 difference = float(yesterday_closing_price) - float(day_before_yesterday_closing_price)
 up_down = None
 if difference > 0:
@@ -39,7 +40,8 @@ if difference > 0:
 else:
     up_down = "🔻"
 
-# getting the percentage difference between yesterday's closing price and day before yesterday's closing price
+# percentage difference between
+# yesterday's closing price and day before yesterday's closing price
 diff_percent = round((difference / yesterday_closing_price) * 100)
 
 # if the percentage difference is greater than 5 then get the news articles
@@ -54,7 +56,9 @@ if abs(diff_percent) > 5:
     news_data = news_response.json()["articles"]
     news_articles = news_data[:3]
 
-    articles = [f"{STOCK_NAME}: {up_down}{diff_percent}%\nHeadline: {article['title']}. \nBrief: {article['description']}" for article in news_articles]
+    articles = [f"{STOCK_NAME}: {up_down}{diff_percent}%"
+                "\nHeadline: {article['title']}."
+                "\nBrief: {article['description']}" for article in news_articles]
 
     # sending the message
     client = Client(TWILLO_SID, TWILLO_AUTH_TOKEN)
